@@ -21,17 +21,17 @@ public class HelloController {
     }
 
     @RequestMapping(value="/loginbypost", method= RequestMethod.POST)
-    public String loginByPost(@RequestParam(value="username",required=true) String name,
-                            @RequestParam(value="password",required=true) String pwd) {
+    public String loginByPost(@RequestParam(value="username") String name,
+                            @RequestParam(value="password") String pwd) {
 
-        return String.format("{\"name\": \"%s\", \"password\": \"%s\"}", name, pwd); //name + " " + pwd;
+        return String.format("{\"name\": \"%s\", \"password\": \"%s\"}", name, pwd);
     }
 
     @RequestMapping(value="/loginbypostfrommysql", method= RequestMethod.POST, produces="application/json;charset=UTF-8")
-    public String loginByPostFromMysql(@RequestParam(value="username",required=true) String name,
-                              @RequestParam(value="password",required=true) String pwd)  throws SQLException {
+    public String loginByPostFromMysql(@RequestParam(value="num") String num,
+                              @RequestParam(value="password") String password) {
 
-        return userDao.num2msg(name).toString();
+        return userDao.getAccountByNum(num, password).toString();
     }
 
 
