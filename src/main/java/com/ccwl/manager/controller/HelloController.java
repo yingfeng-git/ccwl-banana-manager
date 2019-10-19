@@ -5,10 +5,9 @@ import com.ccwl.manager.dao.userDao;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.sql.SQLException;
 
 @RestController
-@RequestMapping("/mvc")
+@RequestMapping("/test")
 public class HelloController {
 
     @Resource(name = "userDao")

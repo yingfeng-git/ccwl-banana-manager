@@ -2,14 +2,14 @@ package com.ccwl.manager.model;
 
 public class Account {
     private int id;
-    private String numb;
+    private String number;
     private String name;
+    private String sex;
     private int age;
-    private String password;
+    private String phoneNumber;
     private String permission;
 
-    public Account() {
-    }
+    public Account() { }
 
     public int getId() {
         return this.id;
@@ -19,36 +19,28 @@ public class Account {
         this.id = id;
     }
 
-    public String getNumb() {
-        return numb;
-    }
+    public String getNumber() { return number; }
 
-    public void setNum(String numb) {
-        this.numb = numb;
-    }
+    public void setNumber(String number) { this.number = number; }
 
-    public String getName() {
-        return this.name;
-    }
+    public String getName() { return name; }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public int getAge() {
-        return age;
-    }
+    public String getSex() { return sex; }
+
+    public void setSex(String sex) { this.sex = sex; }
+
+    public String getPhonenumber() { return phoneNumber; }
+
+    public void setPhonenumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
+
+    public int getAge() { return age; }
 
     public void setAge(int age) {
         this.age = age;
-    }
-
-    public String getPassword() {
-        return this.password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getPermission() {
@@ -60,18 +52,12 @@ public class Account {
     }
 
     public String toString() {
-//        return "Account{id=" + this.id +
-//                ", numb='" + this.numb + '\'' +
-//                ", name='" + this.name + '\'' +
-//                ", age='" + this.age + '\'' +
-//                ", password='" + this.password + '\'' +
-//                ", permission='" + this.permission + "'}";
         return "{\"id\": " + this.id + ", " +
-                "\"numb\": \"" + this.numb + "\", " +
+                "\"numb\": \"" + this.number + "\", " +
                 "\"name\": \"" + this.name + "\", " +
+                "\"sex\": \"" + this.sex + "\", " +
                 "\"age\": " + this.age + ", " +
-                "\"password\": \"" + this.password + "\", " +
+                "\"phoneNumber\": \"" + this.phoneNumber + "\", " +
                 "\"permission\": \"" + this.permission + "\"}";
     }
 }
-
