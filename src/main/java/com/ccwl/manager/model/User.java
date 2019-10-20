@@ -1,6 +1,6 @@
 package com.ccwl.manager.model;
 
-public class Account {
+public class User {
     private int id;
     private String number;
     private String name;
@@ -9,7 +9,7 @@ public class Account {
     private String phoneNumber;
     private String permission;
 
-    public Account() { }
+    public User() { }
 
     public int getId() {
         return this.id;

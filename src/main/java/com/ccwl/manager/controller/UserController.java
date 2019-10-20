@@ -1,6 +1,6 @@
 package com.ccwl.manager.controller;
 
-import com.ccwl.manager.service.AccountServiceImpl;
+import com.ccwl.manager.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,18 +9,18 @@ import javax.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/api/account")
-public class AccountController {
+public class UserController {
     @Autowired
     HttpSession session;
 
-    @Resource(name = "AccountServiceImpl")
-    private AccountServiceImpl accountServiceImpl;
+    @Resource(name = "UserServiceImpl")
+    private UserServiceImpl userServiceImpl;
 
     @RequestMapping(value="/login", method = RequestMethod.POST, produces="application/json;charset=UTF-8")
     @ResponseBody
     public String loginByPostFromMysql(@RequestParam(value="numb") String numb,
                                        @RequestParam(value="password") String password) {
-        return accountServiceImpl.AccountLogin(numb, password);
+        return userServiceImpl.AccountLogin(numb, password);
     }
 
 
@@ -28,7 +28,7 @@ public class AccountController {
     @RequestMapping(value="/logout", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
     @ResponseBody
     public String logout() {
-        return accountServiceImpl.remove();
+        return userServiceImpl.remove();
     }
 
 
