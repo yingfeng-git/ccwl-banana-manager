@@ -8,7 +8,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 @Service("UserServiceImpl")
-public class UserServiceImpl {
+public class UserServiceImpl implements UserService{
 
     @Autowired
     HttpSession session;
