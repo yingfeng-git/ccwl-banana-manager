@@ -23,13 +23,16 @@ public class AccountController {
         return accountServiceImpl.AccountLogin(numb, password);
     }
 
+
+
     @RequestMapping(value="/logout", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
     @ResponseBody
     public String logout() {
         return accountServiceImpl.remove();
     }
 
-    @RequestMapping(value="/getSessionTest", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
+
+    @RequestMapping(value="/getUserMsg", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
     @ResponseBody
     public String getSessionTest() {
         try {
