@@ -23,8 +23,19 @@ public class AdminServiceImpl implements UserService {
         if (user == null){
             return "{\"state\": \"fail\", \"msg\": \"请检查账号密码输入是否正确！\"}";
         }else{
-            this.session.setAttribute("USER", JSONObject.fromObject(user));
+            this.session.setAttribute("USER", "admin");
             return "{\"state\": \"success\", \"msg\": " + JSONObject.fromObject(user) + "}";
+        }
+    }
+
+    public String modifyInfo(Object[] msg) {
+        Object who = this.session.getAttribute("USER");
+        new User();
+        int result = this.adminDao.modifyInfo(msg, who.toString());
+        if (result == -1) {
+            return "{\"state\": \"success\",\"msg\": \"找不到用户\"}";
+        } else {
+            return "{\"state\": \"success\"}";
         }
     }
 
