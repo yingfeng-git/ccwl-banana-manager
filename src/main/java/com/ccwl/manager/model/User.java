@@ -1,62 +1,90 @@
 package com.ccwl.manager.model;
 
-/**
- * [{
- *   name: '学号 :',data: 'number'}, {
- *   name: '姓名 :',data: 'name'}, {
- *   name: '性别 :',data: 'sex'}, {
- *   name: '民族 :',data: 'nationality'}, {
- *   name: '籍贯 :',data: 'nativePlace'}, {
- *   name: '学院 :',data: 'college'}, {
- *   name: '专业 :',data: 'professional'}, {  // 老师没有此字段
- *   name: '班级 :',data: 'class'}, {         // 老师没有此字段
- *   name: '政治面貌 :',data: 'politicsStatus'}, {
- *   name: '联系电话 :',data: 'phoneNumber'}, {
- *   name: '紧急联系人 :',data: 'contactEmergency'},  {
- *   name: '联系人电话 :',data: 'contactPhoneNumber'}]
- */
-
 public class User {
     private int id;
     private String number;
     private String name;
     private String sex;
-    private int age;
+    private String nationality;
+    private String nativePlace;
+    private String college;
+    private String politicsStatus;
     private String phoneNumber;
     private String permission;
 
-    public User() { }
+    public User() {
+    }
 
     public int getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public String getNumber() { return number; }
+    public String getNumber() {
+        return number;
+    }
 
-    public void setNumber(String number) { this.number = number; }
+    public void setNumber(String number) {
+        this.number = number;
+    }
 
-    public String getName() { return name; }
+    public String getName() {
+        return name;
+    }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public String getSex() { return sex; }
+    public String getSex() {
+        return sex;
+    }
 
-    public void setSex(String sex) { this.sex = sex; }
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
 
-    public String getPhonenumber() { return phoneNumber; }
+    public String getNationality() {
+        return nationality;
+    }
 
-    public void setPhonenumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
+    }
 
-    public int getAge() { return age; }
+    public String getNativePlace() {
+        return nativePlace;
+    }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setNativePlace(String nativePlace) {
+        this.nativePlace = nativePlace;
+    }
+
+    public String getCollege() {
+        return college;
+    }
+
+    public void setCollege(String college) {
+        this.college = college;
+    }
+
+    public String getPoliticsStatus() {
+        return politicsStatus;
+    }
+
+    public void setPoliticsStatus(String politicsStatus) {
+        this.politicsStatus = politicsStatus;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getPermission() {
@@ -67,13 +95,20 @@ public class User {
         this.permission = permission;
     }
 
+    @Override
     public String toString() {
-        return "{\"id\": " + this.id + ", " +
-                "\"numb\": \"" + this.number + "\", " +
-                "\"name\": \"" + this.name + "\", " +
-                "\"sex\": \"" + this.sex + "\", " +
-                "\"age\": " + this.age + ", " +
-                "\"phoneNumber\": \"" + this.phoneNumber + "\", " +
-                "\"permission\": \"" + this.permission + "\"}";
+        return "User{" +
+                "id=" + id +
+                ", number='" + number + '\'' +
+                ", name='" + name + '\'' +
+                ", sex='" + sex + '\'' +
+                ", nationality='" + nationality + '\'' +
+                ", nativePlace='" + nativePlace + '\'' +
+                ", college='" + college + '\'' +
+                ", politicsStatus='" + politicsStatus + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", permission='" + permission + '\'' +
+                '}';
     }
+
 }

@@ -1,6 +1,9 @@
 package com.ccwl.manager.controller;
 
-import com.ccwl.manager.service.UserServiceImpl;
+import com.ccwl.manager.model.User;
+import com.ccwl.manager.service.AdminServiceImpl;
+import com.ccwl.manager.service.StudentServiceImpl;
+import com.ccwl.manager.service.TeacherServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,22 +18,32 @@ public class UserController {
     @Autowired
     HttpSession session;
 
-    @Resource(name = "UserServiceImpl")
-    private UserServiceImpl userServiceImpl;
+    @Resource(name = "adminServiceImpl")
+    private AdminServiceImpl adminServiceImpl;
+
+    @Resource(name = "teacherServiceImpl")
+    private TeacherServiceImpl teacherServiceImpl;
+
+    @Resource(name = "studentServiceImpl")
+    private StudentServiceImpl studentServiceImpl;
 
     @RequestMapping(value="/login", method = RequestMethod.POST, produces="application/json;charset=UTF-8")
     @ResponseBody
-    public String loginByPostFromMysql(@RequestParam(value="numb") String numb,
-                                       @RequestParam(value="password") String password) {
-        return userServiceImpl.AccountLogin(numb, password);
+    public String login(@RequestParam(value="numb") String numb,
+                        @RequestParam(value="password") String password,
+                        @RequestParam(value="permission") char permission) {
+        switch (permission){
+            case '0' : return adminServiceImpl.AccountLogin(numb, password);  // admin
+            case '1' : return teacherServiceImpl.AccountLogin(numb, password); // teacher
+        }
+        return studentServiceImpl.AccountLogin(numb, password);  //student
     }
 
     @RequestMapping(value="/logout", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
     @ResponseBody
     public String logout() {
-        return userServiceImpl.remove();
+        return studentServiceImpl.remove();
     }
-
 
     @RequestMapping(value="/getUserMsg", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
     @ResponseBody
@@ -59,13 +72,13 @@ public class UserController {
         return "success";
     }
 
-    @RequestMapping(value="/modifyPersonalInfoFromJson", method = RequestMethod.POST, produces="application/json;charset=UTF-8")
+    @RequestMapping(value="/modifyInfo", method = RequestMethod.POST, produces="application/json;charset=UTF-8")
     @ResponseBody
-    public String ModifyPersonalInfo(@RequestParam(value="msg") String msg) {
+    public String ModifyStudentInfo(@RequestParam(value="msg") String msg) {
         System.out.println(msg);
         JSONObject j1 = JSONObject.fromObject(msg);
-        
-        return "success";
+
+        return "{\"state\": \"success\", \"msg\": "+ msg +"}";
     }
 
 }
