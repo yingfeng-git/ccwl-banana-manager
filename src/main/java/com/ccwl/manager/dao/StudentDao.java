@@ -30,6 +30,7 @@ public class StudentDao extends BaseDao{
                 return s1;
             }
         };
+
         List<Student> studentList = jdbcTemplate.query(sql, params, rm);
         return studentList.isEmpty() ? null : studentList.get(0);
     }
