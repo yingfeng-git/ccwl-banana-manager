@@ -23,8 +23,23 @@ public class StudentServiceImpl implements UserService{
         if (student == null){
             return "{\"state\": \"fail\", \"msg\": \"请检查账号密码输入是否正确！\"}";
         }else{
-            this.session.setAttribute("USER", JSONObject.fromObject(student));
+            this.session.setAttribute("USER", "student");
             return "{\"state\": \"success\", \"msg\": " + JSONObject.fromObject(student) + "}";
+        }
+    }
+
+    public String AccountInfo(String number){
+        Student student = studentDao.getAccountInfoByNum(number);
+        return "{\"state\": \"success\", \"msg\": " + JSONObject.fromObject(student) + "}";
+    }
+
+    public String modifyPassword(String number, String password){
+        Object who = this.session.getAttribute("USER");
+        int result = studentDao.modifyPassword(number, password, who.toString());
+        if (result == -1) {
+            return "{\"state\": \"success\",\"msg\": \"找不到用户\"}";
+        } else {
+            return "{\"state\": \"success\"}";
         }
     }
 

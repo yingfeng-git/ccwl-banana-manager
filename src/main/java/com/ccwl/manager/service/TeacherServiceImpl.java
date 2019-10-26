@@ -23,9 +23,14 @@ public class TeacherServiceImpl implements UserService{
         if (teacher == null){
             return "{\"state\": \"fail\", \"msg\": \"请检查账号密码输入是否正确！\"}";
         }else{
-            this.session.setAttribute("USER", JSONObject.fromObject(teacher));
+            this.session.setAttribute("USER", "teacher");
             return "{\"state\": \"success\", \"msg\": " + JSONObject.fromObject(teacher) + "}";
         }
+    }
+
+    public String AccountInfo(String number){
+        Teacher teacher = teacherDao.getAccountInfoByNum(number);
+        return "{\"state\": \"success\", \"msg\": " + JSONObject.fromObject(teacher) + "}";
     }
 
     public String remove(){
@@ -33,4 +38,13 @@ public class TeacherServiceImpl implements UserService{
         return "{\"msg\": \"success\"}";
     }
 
+    public String modifyPassword(String number, String password) {
+        Object who = this.session.getAttribute("USER");
+        int result = teacherDao.modifyPassword(number, password, who.toString());
+        if (result == -1) {
+            return "{\"state\": \"success\",\"msg\": \"找不到用户\"}";
+        } else {
+            return "{\"state\": \"success\"}";
+        }
+    }
 }
