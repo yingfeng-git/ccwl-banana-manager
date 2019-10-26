@@ -35,8 +35,39 @@ public class StudentDao extends BaseDao{
         return studentList.isEmpty() ? null : studentList.get(0);
     }
 
-    public static void main(String[] args){
-        StudentDao u = new StudentDao();
-        System.out.println(u.getAccountByNum("s101", "123"));
+    public Student getAccountInfoByNum(String number) {
+        String sql = String.format("select * from %s where number = ? limit 1", "student");
+        Object[] params = new Object[] {number};
+        RowMapper<Student> rm = new RowMapper<Student>() {
+            public Student mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Student s1 = new Student();
+                s1.setId(rs.getInt("id"));
+                s1.setNumber(rs.getString("number"));
+                s1.setName(rs.getString("name"));
+                s1.setSex(rs.getString("sex"));
+                s1.setNationality(rs.getString("nationality"));
+                s1.setNativePlace(rs.getString("native_place"));
+                s1.setCollege(rs.getString("college"));
+                s1.setPoliticsStatus(rs.getString("politics_status"));
+                s1.setPhoneNumber(rs.getString("phone_number"));
+                s1.setName(rs.getString("name"));
+                s1.setProfessional(rs.getString("professional"));
+                s1.setPermission("student");
+                return s1;
+            }
+        };
+        List<Student> studentList = jdbcTemplate.query(sql, params, rm);
+        return studentList.isEmpty() ? null : studentList.get(0);
+    }
+
+    public int modifyPassword(String number, String password, String who) {
+        try {
+            String sql = String.format(
+                    "update %s SET password=? WHERE number=?", who);
+            return jdbcTemplate.update(sql, password, number);
+
+        }catch (Exception e){
+            return -1;
+        }
     }
 }
