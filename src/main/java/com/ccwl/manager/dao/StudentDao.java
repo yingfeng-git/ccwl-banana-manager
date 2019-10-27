@@ -27,6 +27,7 @@ public class StudentDao extends BaseDao{
                 s1.setPhoneNumber(rs.getString("phone_number"));
                 s1.setName(rs.getString("name"));
                 s1.setProfessional(rs.getString("professional"));
+                s1.setPermission("student");
                 return s1;
             }
         };

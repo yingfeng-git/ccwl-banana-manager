@@ -24,7 +24,9 @@ public class StudentServiceImpl implements UserService{
             return "{\"state\": \"fail\", \"msg\": \"请检查账号密码输入是否正确！\"}";
         }else{
             this.session.setAttribute("USER", "student");
-            return "{\"state\": \"success\", \"msg\": " + JSONObject.fromObject(student) + "}";
+            String result = String.format("{\"state\": \"success\", \"msg\": %s}", JSONObject.fromObject(student));
+//            System.out.println(result);
+            return result;
         }
     }
 

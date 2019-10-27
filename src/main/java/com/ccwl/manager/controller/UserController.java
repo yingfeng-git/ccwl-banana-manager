@@ -1,6 +1,5 @@
 package com.ccwl.manager.controller;
 
-import com.ccwl.manager.model.User;
 import com.ccwl.manager.service.AdminServiceImpl;
 import com.ccwl.manager.service.StudentServiceImpl;
 import com.ccwl.manager.service.TeacherServiceImpl;

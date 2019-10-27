@@ -26,6 +26,7 @@ public class TeacherDao extends BaseDao{
                 t1.setPoliticsStatus(rs.getString("politics_status"));
                 t1.setPhoneNumber(rs.getString("phone_number"));
                 t1.setName(rs.getString("name"));
+                t1.setPermission("teacher");
                 return t1;
             }
         };
