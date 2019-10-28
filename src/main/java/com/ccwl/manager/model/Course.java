@@ -1,11 +1,9 @@
 package com.ccwl.manager.model;
 
 public class Course {
-    private String student_name;
-    private String teacher_name;
-    private String course;
-    private String classroom;
-    private String class_time;
+    String student_name;
+    String teacher_name;
+    Integer week;
 
     public String getStudent_name() {
         return student_name;
@@ -23,6 +21,20 @@ public class Course {
         this.teacher_name = teacher_name;
     }
 
+    public Integer getWeek() {
+        return week;
+    }
+
+    public void setWeek(Integer week) {
+        this.week = week;
+    }
+
+    String course;
+    String classroom;
+    Integer class_time;
+
+
+
     public String getCourse() {
         return course;
     }
@@ -39,11 +51,11 @@ public class Course {
         this.classroom = classroom;
     }
 
-    public String getClass_time() {
+    public Integer getClass_time() {
         return class_time;
     }
 
-    public void setClass_time(String class_time) {
+    public void setClass_time(Integer class_time) {
         this.class_time = class_time;
     }
 }
