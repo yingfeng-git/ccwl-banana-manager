@@ -14,9 +14,9 @@ import java.util.List;
 @Repository
 public class ClassTableDao extends BaseDao {
 
-    //返回对象数组
+    //返回对象数组,添加week
     public List<Course> getCourseByClassId(String number,String table) {
-        String sql =String.format( "SELECT student.name ,teacher.name,class_time,classroom,course " +
+        String sql =String.format( "SELECT student.name ,teacher.name,classroom,course,class_time,week " +
                 "FROM curriculum,student,teacher,student_class,teacher_class WHERE " +
                 "student.number = student_class.number AND " +
                 "teacher.number = teacher_class.number AND " +
@@ -29,7 +29,8 @@ public class ClassTableDao extends BaseDao {
                 Course c1 = new Course();
                 c1.setStudent_name(rs.getString("student.name"));
                 c1.setTeacher_name(rs.getString("teacher.name"));
-                c1.setClass_time(rs.getString("class_time"));
+                c1.setClass_time(rs.getInt("class_time"));
+                c1.setWeek(rs.getInt("week"));
                 c1.setClassroom(rs.getString("classroom"));
                 c1.setCourse(rs.getString("course"));
 
