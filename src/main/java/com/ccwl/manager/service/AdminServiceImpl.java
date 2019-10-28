@@ -5,9 +5,12 @@ import com.ccwl.manager.model.User;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
 
 @Service("adminServiceImpl")
 public class AdminServiceImpl implements UserService {
@@ -17,6 +20,9 @@ public class AdminServiceImpl implements UserService {
 
     @Resource(name = "adminDao")
     private AdminDao adminDao;
+
+    private static final String path =
+            "C:\\Users\\yingfeng\\IdeaProjects\\spring\\ccwl-banana-manager\\web\\uploadFile\\%s";
 
     public String AccountLogin(String number, String password) {
         User user = adminDao.getAccountByNum(number, password);
@@ -43,4 +49,28 @@ public class AdminServiceImpl implements UserService {
         this.session.removeAttribute("USER");
         return "{\"msg\": \"success\"}";
     }
+
+
+    public String uploadExcel(CommonsMultipartFile file) {
+        try {
+            String fileName = String.format(path, file.getOriginalFilename());
+            String Extensions = fileName.substring(fileName.length()-4);  // 获取后缀名，判断是否Excel文件
+            if ("xlsx".equals(Extensions)) {
+                File newFile=new File(fileName);
+                file.transferTo(newFile);
+                return "{\"state\": \"success\"}";
+            }else if (".xls".equals(Extensions)){
+                File newFile=new File(fileName);
+                file.transferTo(newFile);
+                return "{\"state\": \"success\"}";
+            }else {
+                return "{\"state\": \"fail\", \"msg\":\"File format fail!\"}";
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "{\"state\": \"fail\"}";
+        }
+    }
+
+
 }
