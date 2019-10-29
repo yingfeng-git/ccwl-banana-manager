@@ -23,7 +23,7 @@ public class ClassTableServiceImpl {
         if (courseList == null){
             return "{\"state\": \"fail\", \"msg\": \"请检查账号是否正确！\"}";
         }else{
-            this.session.setAttribute("USER", JSONArray.fromObject(courseList));
+
             return "{\"state\": \"success\", \"msg\": " + JSONArray.fromObject( courseList) + "}";
         }
     }
