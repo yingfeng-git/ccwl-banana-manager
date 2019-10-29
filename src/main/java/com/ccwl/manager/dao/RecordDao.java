@@ -14,7 +14,7 @@ public class RecordDao extends BaseDao {
     //返回对象数组
     public List<Record> getRecordByNumber(String number) {
         String sql =String.format( "select number,gradepoint.name,curriculum.course,grade_point from gradepoint,curriculum " +
-                        "where number = ? and curriculum.class_id = gradepoint.class_id  GROUP BY curriculum.class_id");
+                        "where number = ? and curriculum.class_id = gradepoint.class_id  GROUP BY curriculum.course,number,gradepoint.name,grade_point");
         Object[] params = new Object[] {number};
         RowMapper<Record> rm = new RowMapper<Record>() {
             public Record mapRow(ResultSet rs, int rowNum) throws SQLException {

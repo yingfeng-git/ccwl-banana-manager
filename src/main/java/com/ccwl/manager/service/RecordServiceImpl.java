@@ -1,8 +1,7 @@
 package com.ccwl.manager.service;
 
-import com.ccwl.manager.dao.ClassTableDao;
+
 import com.ccwl.manager.dao.RecordDao;
-import com.ccwl.manager.model.Course;
 import com.ccwl.manager.model.Record;
 import net.sf.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,7 @@ public class RecordServiceImpl {
         if (recordList == null){
             return "{\"state\": \"fail\", \"msg\": \"请检查账号是否正确！\"}";
         }else{
-            this.session.setAttribute("USER", JSONArray.fromObject(recordList));
+
             return "{\"state\": \"success\", \"msg\": " + JSONArray.fromObject( recordList) + "}";
         }
     }
