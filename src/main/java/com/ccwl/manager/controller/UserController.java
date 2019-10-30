@@ -38,7 +38,7 @@ public class UserController {
         return studentServiceImpl.AccountLogin(number, password);  //student
     }
 
-    @RequestMapping(value="/logout", method = RequestMethod.GET, produces="text/html;charset=UTF-8")
+    @RequestMapping(value="/logout", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
     @ResponseBody
     public String logout() {
         return studentServiceImpl.remove();
