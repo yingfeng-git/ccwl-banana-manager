@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/api/record")
+@CrossOrigin
 public class RecordController {
     @Autowired
     HttpSession session;

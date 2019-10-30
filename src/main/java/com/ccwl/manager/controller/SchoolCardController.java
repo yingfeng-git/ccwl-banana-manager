@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/api/SchoolCard")
+@CrossOrigin
 public class SchoolCardController {
 
     @Autowired

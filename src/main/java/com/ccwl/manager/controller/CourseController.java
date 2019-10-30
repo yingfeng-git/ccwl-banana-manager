@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/api/course")
+@CrossOrigin
 public class CourseController {
     @Autowired
     HttpSession session;

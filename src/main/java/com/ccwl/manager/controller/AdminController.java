@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 
 @RestController
 @RequestMapping("/api/admin")
+@CrossOrigin
 public class AdminController {
 
     @Resource(name = "adminServiceImpl")

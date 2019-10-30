@@ -1,6 +1,6 @@
 package com.ccwl.manager.service;
 
-
+import com.ccwl.manager.dao.ClassTableDao;
 import com.ccwl.manager.dao.RecordDao;
 import com.ccwl.manager.model.Record;
 import net.sf.json.JSONArray;

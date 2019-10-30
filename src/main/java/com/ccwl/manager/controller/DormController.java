@@ -10,12 +10,19 @@ import javax.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/api/dorm")
+@CrossOrigin
 public class DormController {
     @Autowired
     HttpSession session;
 
     @Resource(name = "dormServiceImpl")
     private DormServiceImpl dormServiceImpl;
+
+    @RequestMapping(value="/getClassName", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
+    @ResponseBody
+    public String getSchoolCardInfo() {
+        return dormServiceImpl.getClassName();
+    }
 
     @RequestMapping(value="/getDormByNum", method = RequestMethod.POST, produces="application/json;charset=UTF-8")
     @ResponseBody

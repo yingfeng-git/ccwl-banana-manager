@@ -1,6 +1,5 @@
 package com.ccwl.manager.dao;
 
-import com.ccwl.manager.model.Course;
 import com.ccwl.manager.model.Record;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;

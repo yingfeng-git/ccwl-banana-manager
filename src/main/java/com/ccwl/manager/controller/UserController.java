@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/api/account")
+@CrossOrigin
 public class UserController {
     @Autowired
     HttpSession session;
