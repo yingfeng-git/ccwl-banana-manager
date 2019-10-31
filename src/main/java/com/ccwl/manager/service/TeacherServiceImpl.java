@@ -79,4 +79,14 @@ public class TeacherServiceImpl implements UserService{
         }
     }
 
+    public String getClassFromClassName(String className){
+        try{
+            this.session.getAttribute("USER").toString();
+            return String.format("{\"state\": \"success\", \"msg\": %s}",
+                    JSONArray.fromObject(teacherDao.getClassFromClassName(className)).toString());
+        } catch (NullPointerException e){
+            return "{\"state\": \"fail\", \"msg\": \"用户未登陆\"}";
+        }
+    }
+
 }

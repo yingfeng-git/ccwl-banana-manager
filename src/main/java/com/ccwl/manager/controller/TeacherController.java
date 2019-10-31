@@ -39,4 +39,10 @@ public class TeacherController {
         return teacherService.getAttenceFromNumber(number);
     }
 
+    @RequestMapping(value="/getClassFromClassName", method = RequestMethod.POST, produces="application/json;charset=UTF-8")
+    @ResponseBody
+    public String getClassFromClassName(@RequestParam(value="className") String className) {
+        return teacherService.getClassFromClassName(className);
+    }
+
 }

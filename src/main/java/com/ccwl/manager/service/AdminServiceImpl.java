@@ -39,7 +39,7 @@ public class AdminServiceImpl implements UserService {
         new User();
         int result = this.adminDao.modifyInfo(msg, who.toString());
         if (result == -1) {
-            return "{\"state\": \"success\",\"msg\": \"找不到用户\"}";
+            return "{\"state\": \"fail\",\"msg\": \"找不到用户\"}";
         } else {
             return "{\"state\": \"success\"}";
         }
@@ -72,5 +72,46 @@ public class AdminServiceImpl implements UserService {
         }
     }
 
+    public String resetPassword(String who, String number) {
+        try {
+            this.session.getAttribute("USER").toString();
+            int result = this.adminDao.resetPassword(who, number);
+            if (result != 1) {
+                return "{\"state\": \"fail\",\"msg\": \"找不到用户\"}";
+            } else {
+                return "{\"state\": \"success\"}";
+            }
+        }catch (NullPointerException E){
+            return "{\"state\": \"fail\", \"msg\": \"用户未登陆\"}";
+        }
+    }
+
+    public String modifyStudentInfo(String number, String college, String professional, String className, String sex, String name) {
+        try {
+            this.session.getAttribute("USER").toString();
+            int result = this.adminDao.modifyStudentInfo(number, college, professional, className,sex, name);
+            if (result != 1) {
+                return "{\"state\": \"fail\",\"msg\": \"找不到用户\"}";
+            } else {
+                return "{\"state\": \"success\"}";
+            }
+        }catch (NullPointerException E){
+            return "{\"state\": \"fail\", \"msg\": \"用户未登陆\"}";
+        }
+    }
+
+    public String modifyTeacherInfo(String number, String college, String sex, String name) {
+        try {
+            this.session.getAttribute("USER").toString();
+            int result = this.adminDao.modifyTeacherInfo(number, college,sex, name);
+            if (result != 1) {
+                return "{\"state\": \"fail\",\"msg\": \"找不到用户\"}";
+            } else {
+                return "{\"state\": \"success\"}";
+            }
+        }catch (NullPointerException E){
+            return "{\"state\": \"fail\", \"msg\": \"用户未登陆\"}";
+        }
+    }
 
 }

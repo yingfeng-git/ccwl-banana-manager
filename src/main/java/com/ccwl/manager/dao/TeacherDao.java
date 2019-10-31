@@ -13,26 +13,27 @@ import java.util.Map;
 
 @Repository
 public class TeacherDao extends BaseDao{
+    private RowMapper<Teacher> rm = new RowMapper<Teacher>() {
+        public Teacher mapRow(ResultSet rs, int rowNum) throws SQLException {
+            Teacher t1 = new Teacher();
+            t1.setId(rs.getInt("id"));
+            t1.setNumber(rs.getString("number"));
+            t1.setName(rs.getString("name"));
+            t1.setSex(rs.getString("sex"));
+            t1.setNationality(rs.getString("nationality"));
+            t1.setNativePlace(rs.getString("native_place"));
+            t1.setCollege(rs.getString("college"));
+            t1.setPoliticsStatus(rs.getString("politics_status"));
+            t1.setPhoneNumber(rs.getString("phone_number"));
+            t1.setName(rs.getString("name"));
+            t1.setPermission("teacher");
+            return t1;
+        }
+    };
+
     public Teacher getAccountByNum(String number, String password) {
         String sql = String.format("select * from %s where number = ? and password = ? limit 1", "teacher");
         Object[] params = new Object[] {number, password};
-        RowMapper<Teacher> rm = new RowMapper<Teacher>() {
-            public Teacher mapRow(ResultSet rs, int rowNum) throws SQLException {
-                Teacher t1 = new Teacher();
-                t1.setId(rs.getInt("id"));
-                t1.setNumber(rs.getString("number"));
-                t1.setName(rs.getString("name"));
-                t1.setSex(rs.getString("sex"));
-                t1.setNationality(rs.getString("nationality"));
-                t1.setNativePlace(rs.getString("native_place"));
-                t1.setCollege(rs.getString("college"));
-                t1.setPoliticsStatus(rs.getString("politics_status"));
-                t1.setPhoneNumber(rs.getString("phone_number"));
-                t1.setName(rs.getString("name"));
-                t1.setPermission("teacher");
-                return t1;
-            }
-        };
         List<Teacher> teacherList = jdbcTemplate.query(sql, params, rm);
         return teacherList.isEmpty() ? null : teacherList.get(0);
     }
@@ -40,23 +41,6 @@ public class TeacherDao extends BaseDao{
     public Teacher getAccountInfoByNum(String number) {
         String sql = String.format("select * from %s where number = ? limit 1", "teacher");
         Object[] params = new Object[] {number};
-        RowMapper<Teacher> rm = new RowMapper<Teacher>() {
-            public Teacher mapRow(ResultSet rs, int rowNum) throws SQLException {
-                Teacher t1 = new Teacher();
-                t1.setId(rs.getInt("id"));
-                t1.setNumber(rs.getString("number"));
-                t1.setName(rs.getString("name"));
-                t1.setSex(rs.getString("sex"));
-                t1.setNationality(rs.getString("nationality"));
-                t1.setNativePlace(rs.getString("native_place"));
-                t1.setCollege(rs.getString("college"));
-                t1.setPoliticsStatus(rs.getString("politics_status"));
-                t1.setPhoneNumber(rs.getString("phone_number"));
-                t1.setName(rs.getString("name"));
-                t1.setPermission("teacher");
-                return t1;
-            }
-        };
         List<Teacher> teacherList = jdbcTemplate.query(sql, params, rm);
         return teacherList.isEmpty() ? null : teacherList.get(0);
     }
@@ -93,8 +77,20 @@ public class TeacherDao extends BaseDao{
         return jdbcTemplate.queryForList(sql, number);
     }
 
+    public List<Map<String, Object>> getClassFromClassName(String className){
+        String sql = "SELECT teacher.name,classroom, course, class_time, week\n" +
+                "FROM curriculum,student,teacher,student_class,teacher_class\n" +
+                "WHERE student.number = student_class.number\n" +
+                "  AND teacher.number = teacher_class.number\n" +
+                "  AND curriculum.class_id = student_class.class_id\n" +
+                "  AND curriculum.class_id = teacher_class.class_id\n" +
+                "  AND student.number = (select number from student where class_name = ? limit 1);";
+
+        return jdbcTemplate.queryForList(sql, className);
+    }
+
     public static void main(String[] args) {
         TeacherDao t = new TeacherDao();
-        System.out.println(JSONArray.fromObject(t.getAttenceFromNumber("s101")));
+        System.out.println(JSONArray.fromObject(t.getClassFromClassName("计算机科学与技术1班")));
     }
 }
