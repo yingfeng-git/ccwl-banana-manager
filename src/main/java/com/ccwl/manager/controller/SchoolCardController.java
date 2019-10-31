@@ -21,7 +21,6 @@ public class SchoolCardController {
     @RequestMapping(value="/getSchoolCardInfo", method = RequestMethod.POST, produces="application/json;charset=UTF-8")
     @ResponseBody
     public String getSchoolCardInfo(@RequestParam(value="number") String number) {
-
         return schoolCardServiceImpl.getSchoolCardInfo(number);  //student
     }
 
@@ -29,8 +28,13 @@ public class SchoolCardController {
     @ResponseBody
     public String setSchoolCardMoney(@RequestParam(value="number") String number,
                                      @RequestParam(value="money") int money) {
-
         return schoolCardServiceImpl.setSchoolCardMoney(number, money);
     }
 
+    @RequestMapping(value="/setSchoolCardHotWaterMoney", method = RequestMethod.POST, produces="application/json;charset=UTF-8")
+    @ResponseBody
+    public String setSchoolCardHotWaterMoney(@RequestParam(value="number") String number,
+                                             @RequestParam(value="money") int money) {
+        return schoolCardServiceImpl.setSchoolCardHotWaterMoney(number, money);
+    }
 }

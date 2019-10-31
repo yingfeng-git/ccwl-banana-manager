@@ -29,14 +29,29 @@ public class SchoolCardDao extends BaseDao{
     }
 
 
-    public int getInfoByNum(String number, int money) {
+    public int setSchoolCardMoney(String number, int money) {
         try {
             String sql = String.format(
-                    "update %s SET meal_card_balance=? WHERE number=?", "yikatong");
+                    "update %s SET meal_card_balance = meal_card_balance + ? WHERE number=?", "yikatong");
             return jdbcTemplate.update(sql, money, number);
         }catch (Exception e){
             return -1;
         }
+    }
+
+    public int setSchoolCardHotWaterMoney(String number, int money) {
+        try {
+            String sql = String.format(
+                    "update %s SET hot_water_balance = hot_water_balance + ? WHERE number=?", "yikatong");
+            return jdbcTemplate.update(sql, money, number);
+        }catch (Exception e){
+            return -1;
+        }
+    }
+
+    public static void main(String[] args) {
+        SchoolCardDao ss = new SchoolCardDao();
+        ss.setSchoolCardHotWaterMoney("s101", 20);
     }
 
 }

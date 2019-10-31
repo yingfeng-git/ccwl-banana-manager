@@ -28,8 +28,16 @@ public class SchoolCardServiceImpl {
     }
 
     public String setSchoolCardMoney(String number, int money){
-        schoolCardDao.getInfoByNum(number, money);
-        int result = schoolCardDao.getInfoByNum(number, money);
+        int result = schoolCardDao.setSchoolCardMoney(number, money);
+        if (result == -1) {
+            return "{\"state\": \"success\",\"msg\": \"找不到用户\"}";
+        } else {
+            return "{\"state\": \"success\"}";
+        }
+    }
+
+    public String setSchoolCardHotWaterMoney(String number, int money){
+        int result = schoolCardDao.setSchoolCardHotWaterMoney(number, money);
         if (result == -1) {
             return "{\"state\": \"success\",\"msg\": \"找不到用户\"}";
         } else {
