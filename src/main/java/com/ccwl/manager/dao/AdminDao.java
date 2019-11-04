@@ -8,7 +8,9 @@ import org.springframework.stereotype.Repository;
 import javax.servlet.http.HttpSession;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class AdminDao extends BaseDao {
@@ -71,9 +73,74 @@ public class AdminDao extends BaseDao {
         }
     }
 
+    public int insertScore(List<ArrayList<Object>> data) {
+        int count = 0;
+        String sql = "insert into gradepoint(number, name, grade_point, class_id, course) " +
+                "values(?, ?, ?, (select curriculum.class_id from curriculum where course=? limit 1), ?)";
+        for (ArrayList<Object> arrayList : data) {
+            try {
+                count += jdbcTemplate.update(
+                        sql, arrayList.get(0), arrayList.get(1), arrayList.get(2), arrayList.get(3), arrayList.get(3));
+            }catch (Exception e){
+                ;
+            }
+        }
+        return count;
+    }
+
+    public int insertTeacher(String number, String college, String sex, String name){
+        String chack = "select count(*) from teacher where number=?";
+        if ((Long)jdbcTemplate.queryForMap(chack, number).get("count(*)") > 0){
+            return -1;
+        }else {
+            String sql = "insert into teacher(number, name, sex, college, password) values(?, ?, ?, ?, '123456')";
+            return jdbcTemplate.update(sql, number, name, sex, college);
+        }
+    }
+
+    public int insertStudent(String number, String college, String professional, String className, String sex, String name) {
+        String chack = "select count(*) from student where number=?";
+        if ((Long)jdbcTemplate.queryForMap(chack, number).get("count(*)") > 0){
+            return -1;
+        }else {
+            String sql = "insert into student(number, name, sex, professional, class_name, college, password) " +
+                    "values(?, ?, ?, ?, ?, ?, '123456')";
+            return jdbcTemplate.update(sql, number, name, sex, professional, className, college);
+        }
+
+    }
+
+    public int insertCourse(String course) {
+        String sql = "insert into course(course) values(?)";
+        return jdbcTemplate.update(sql, course);
+
+
+    }
+
+    public int uploadAttence(List<ArrayList<Object>> data){
+        int count = 0;
+        String sql =
+                "insert into attence(number, student_name, class_id, course, teacher_name, classroom, which_week, week, class_time, attence) " +
+                "values(?,?,(select class_id from curriculum where course = ? limit 1),?,?,?,?,?,?,?) ";
+
+        for (ArrayList<Object> arrayList : data) {
+            try {
+                count += jdbcTemplate.update(
+                        sql, arrayList.get(0), arrayList.get(1), arrayList.get(2), arrayList.get(2), arrayList.get(3),
+                        arrayList.get(4),arrayList.get(5),arrayList.get(6),arrayList.get(7),arrayList.get(8));
+            }catch (Exception e){
+                System.out.println(e);
+            }
+        }
+        return count;
+    }
+
+
+
     public static void main(String[] args) {
         AdminDao adminDao = new AdminDao();
-        adminDao.modifyStudentInfo("s102", "college", "professional",
-                "className", "sex", "name");
+//        adminDao.insertCourse("华为工程师认证");
+//        System.out.println(adminDao.getStudents());
     }
+
 }

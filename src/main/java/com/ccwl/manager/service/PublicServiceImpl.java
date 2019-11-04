@@ -46,4 +46,14 @@ public class PublicServiceImpl {
         }
     }
 
+    public String getStudents(){
+        try{
+            this.session.getAttribute("USER").toString();
+            return String.format("{\"state\": \"success\", \"msg\": %s}",
+                    JSONArray.fromObject(publicDao.getStudents()).toString());
+        } catch (NullPointerException e){
+            return "{\"state\": \"fail\", \"msg\": \"用户未登陆\"}";
+        }
+    }
+
 }

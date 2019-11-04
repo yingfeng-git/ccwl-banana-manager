@@ -36,5 +36,10 @@ public class PublicController {
         return publicService.getTeacher();
     }
 
+    @RequestMapping(value="/getStudents", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
+    @ResponseBody
+    public String getStudent() {
+        return publicService.getStudents();
+    }
 
 }

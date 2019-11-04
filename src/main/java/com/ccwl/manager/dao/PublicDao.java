@@ -9,7 +9,7 @@ import java.util.Map;
 @Repository
 public class PublicDao extends BaseDao{
     public List<Map<String,Object>> getCourse(){
-        String sql = "select distinct course from curriculum";
+        String sql = "select * from course";
         return jdbcTemplate.queryForList(sql);
     }
 
@@ -23,10 +23,16 @@ public class PublicDao extends BaseDao{
         return jdbcTemplate.queryForList(sql);
     }
 
+    public List<Map<String, Object>> getStudents(){
+        String sql = "select college, professional, class_name, name from student";
+        return jdbcTemplate.queryForList(sql);
+    }
+
     public static void main(String[] args) {
         PublicDao p = new PublicDao();
         System.out.println(JSONArray.fromObject(p.getCourse()));
         System.out.println(JSONArray.fromObject(p.getCollege()));
         System.out.println(JSONArray.fromObject(p.getTeacher()));
+
     }
 }
